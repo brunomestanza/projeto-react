@@ -1,52 +1,34 @@
-import { Experience } from './components/Experience';
-import { SectionHeading } from './components/SectionHeading';
-import { Profile } from './components/Profile';
-import profileImg from './assets/profile.jpeg';
-import './App.css';
 import { ThemeProvider } from 'styled-components';
-import { Button } from './components/Button';
+import './App.css';
+import { useState } from 'react';
 
 const theme = {
   main: '#c2410c',
 };
 
 export function App() {
+  const [name, setName] = useState('');
+  const [role, setRole] = useState('');
+
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <SectionHeading title="About me" />
-        <p>
-          The Generator App is an online tool that helps you to export
-          ready-made templates ready to work as your future website. It helps
-          you to combine slides, panels and other components and export it as a
-          set of static files: HTML/CSS/JS.
-        </p>
-        <Profile src={profileImg} alt="" />
-        <SectionHeading title="Work experience" />
-        <Experience
-          date="17/01/2000 - 10/10/2000"
-          enterprise="Empresa 1"
-          local="Local 1"
-          title="Trabalhador honesto"
-          workload="Tempo integral"
-          tagColors={{ backgroundColor: '#166534', color: '#4ade80' }}
+        {name.length > 3 && role.length > 3 ? (
+          <p>
+            Olá, sou {name} e meu cargo é {role}
+          </p>
+        ) : (
+          <p>Digite um nome e um cargo</p>
+        )}
+        <input
+          type="text"
+          placeholder="Digite o nome"
+          onChange={(event) => setName(event.target.value)}
         />
-
-        <Experience
-          date="15/02/2010 - 10/10/2012"
-          enterprise="Empresa 2"
-          local="Local 2"
-          title="Trabalhador desonesto"
-          workload="Quando dá"
-          tagColors={{ backgroundColor: '#991b1b', color: '#f87171' }}
-        />
-        <Button
-          handleButtonClick={() => alert('Informações salvas!')}
-          title="Salvar"
-        />
-        <Button
-          handleButtonClick={() => alert('Upload cancelado!')}
-          title="Cancelar"
+        <input
+          type="text"
+          placeholder="Digite o cargo"
+          onChange={(event) => setRole(event.target.value)}
         />
       </div>
     </ThemeProvider>
