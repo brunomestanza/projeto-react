@@ -1,4 +1,5 @@
 # Principios
+
 1 -> Componentização: Tudo que for reutilizado várias vezes na aplicação OU tiver um código
 muito longo, pode ser componentizado. Componentizar é o fato de dividir o código em pedaços
 menores e reutilizáveis.

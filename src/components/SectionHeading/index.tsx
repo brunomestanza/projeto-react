@@ -1,11 +1,9 @@
-import { Title } from "./styles"
+import { Title } from "./styles";
 
 interface SectionHeadingProps {
-  title: string
+  title: string;
 }
 
 export function SectionHeading(props: SectionHeadingProps) {
-  return (
-    <Title>{props.title}</Title>
-  )
+  return <Title>{props.title}</Title>;
 }

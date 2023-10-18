@@ -1,12 +1,18 @@
-import { Container, FlexContainer, LocationContainer, Tag, TagStyleProps } from "./styles";
+import {
+  Container,
+  FlexContainer,
+  LocationContainer,
+  Tag,
+  TagStyleProps,
+} from "./styles";
 
 interface ExperienceProps {
-  title: string
-  workload: string
-  enterprise: string
-  local: string
-  date: string
-  tagColors: TagStyleProps
+  title: string;
+  workload: string;
+  enterprise: string;
+  local: string;
+  date: string;
+  tagColors: TagStyleProps;
 }
 
 export function Experience(props: ExperienceProps) {
@@ -31,5 +37,5 @@ export function Experience(props: ExperienceProps) {
         </FlexContainer>
       </div>
     </Container>
-  )
+  );
 }
