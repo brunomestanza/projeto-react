@@ -6,30 +6,48 @@ const theme = {
   main: '#c2410c',
 };
 
+interface StudentProps {
+  name: string;
+  registrationNumber: number;
+}
+
 export function App() {
-  const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [students, setStudents] = useState<StudentProps[]>([]);
+
+  function handleLoadStudents() {
+    setStudents([
+      {
+        name: 'Victor Italo',
+        registrationNumber: 25,
+      },
+      {
+        name: 'Jessica Sobreira',
+        registrationNumber: 13,
+      },
+      {
+        name: 'Bruna Fonseca',
+        registrationNumber: 1,
+      },
+      {
+        name: 'Rodrigo Minuzzo',
+        registrationNumber: 19,
+      },
+    ]);
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {name.length > 3 && role.length > 3 ? (
-          <p>
-            Olá, sou {name} e meu cargo é {role}
-          </p>
-        ) : (
-          <p>Digite um nome e um cargo</p>
-        )}
-        <input
-          type="text"
-          placeholder="Digite o nome"
-          onChange={(event) => setName(event.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Digite o cargo"
-          onChange={(event) => setRole(event.target.value)}
-        />
+        {students.length === 0 && <p>Informações não carregadas!</p>}
+        {students.map((student) => {
+          return (
+            <div key={student.registrationNumber}>
+              <p>Estudante: {student.name}</p>
+              <p>Matricula: {student.registrationNumber}</p>
+            </div>
+          );
+        })}
+        <button onClick={handleLoadStudents}>Carregar...</button>
       </div>
     </ThemeProvider>
   );
