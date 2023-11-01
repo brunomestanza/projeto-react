@@ -1,16 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from "react"
+import axios from 'axios';
+
+interface DataResponse {
+  name: string
+  desc: string
+}
+
+const instance = axios.create({
+  baseURL: 'https://www.dnd5eapi.co/api',
+});
+
 
 export function Home() {
-  const [counter, setCounter] = useState(0);
+  const [data, setData] = useState<DataResponse>({} as DataResponse);
+  const [magicName, setMagicName] = useState('');
 
-  function handleIncreaseCounter() {
-    setCounter(counter + 1)
-  }
+  const cachedLoadData = useCallback(async function loadData() {
+    try {
+      const response = await instance.get<DataResponse>(`/spells/${magicName}`)
+      setData(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [magicName])
+
+  useEffect(() => {
+    const typingWait = setTimeout(async () => {
+      cachedLoadData()
+    }, 2000);
+
+    return () => {
+      clearTimeout(typingWait);
+    };
+  }, [cachedLoadData])
 
   return (
     <div>
-      <p>Contador: {counter}</p>
-      <button onClick={handleIncreaseCounter}>Aumentar</button>
+      <input
+        type="text"
+        placeholder="Nome da magia"
+        value={magicName}
+        onChange={(e) => setMagicName(e.target.value)}
+      />
+      <p>{data.name}</p>
+      <p>{data.desc}</p>
     </div>
   )
 }
